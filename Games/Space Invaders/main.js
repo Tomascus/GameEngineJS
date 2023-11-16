@@ -81,6 +81,18 @@ let alienMoveDown = false;
 
 const player = new Player(canvas.width/2 -25, canvas.height -50,50,20);
 let bullets = [];
+const aliens = createAliens();
+
+function createAliens() {
+    let aliensArray [];
+    for(let row = 0; row<alienRows; row++) {
+        for(let col = 0; col < alienColumns; col++) {
+            const x = col*(alienWidth+alienPadding);
+            const y = row * (alienHeight + alienPadding);
+            aliensArray.push(new Alien(x,y,alienWidth,alienHeight));
+        }
+    } return aliensArray;
+}
 
 const keyStates = {
 
@@ -90,6 +102,35 @@ const keyStates = {
 };
 
 function update(){
+if(keyStates.ArrowLeft) {
+    player.moveLeft();
+} else if(keyStates.ArrowRight) {
+    player.moveRight();
+} else if (keyStates.Space) {
+    player.fire();
+    keyStates.Space = false;
+}
+bullets.forEach((bullet, index) => {
+    bullet.update();
+    if(bullet.y <0) {
+        bullets.splice(index, 1);
+    }
+});
+
+let moveDownThisFrame = false;
+if(alienMoveDown) {
+    moveDownThisFrame = true;
+    alienMoveDown = false;
+}
+
+aliens.forEach((alien) => {
+    if(moveDownThisFrame) {
+        alien.y +=20;
+    } else {
+        alien.x += 2*alienDirection;
+    }
+
+});
 
 }
 
