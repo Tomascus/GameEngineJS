@@ -61,6 +61,7 @@ class Game{
         this.gameObjectsToRemove.push(gameObject);
     }
 
+    //need to add functionality for gameobjects to reset
     reset(){
         this.isRunning = false;
         for(const gameObject of this.gameObjects) {
