@@ -167,7 +167,6 @@ if(!moveDownThisFrame && (rightMostAlien.x + alienWidth > canvas.width || leftMo
     alienDirection *= -1;
     alienMoveDown = true;
 }
-}
 
 function draw() {
 
